@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/color_contenedor_componentes"
+    android:orientation="horizontal"
+    tools:context=".activities.DragAndDropActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/barra_herramientas">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/barra_herramientas"
+                >
+
+                <Button
+                    android:id="@+id/bton_abrir_entradas"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start"
+                    android:background="@drawable/icon_left"
+                    android:onClick="clickBotones"
+                    />
+                <Button
+                    android:onClick="clickBotones"
+                    android:id="@+id/bton_cancelar"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/holo_red_light"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:background="@drawable/icon_cancelar"
+                    />
+
+                <Button
+                    android:background="@drawable/anim_boton_1"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/bton_enviar"
+                    android:onClick="clickBotones"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:text="enviar"
+                    android:textSize="9dp"/>
+
+
+            </android.support.design.widget.CoordinatorLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/layou_lines"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+
+
+                    />
+
+                <RelativeLayout
+
+                    android:id="@+id/left_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="clickBotones"
+                    android:background="@color/color_contenedor_componentes"
+
+
+                    android:orientation="vertical" />
+
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_entradas"
+            android:layout_width="70dp"
+            android:padding="4dp"
+            android:background="@color/fondo_menu"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="start"
+            android:visibility="invisible"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="2dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Digital input"
+                    android:textColor="@android:color/white"
+                    android:textSize="10dp"/>
+
+                <com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView
+                    android:id="@+id/entrada_digital"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_sensor" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="2dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Digital output"
+                    android:textColor="@android:color/white"
+                    android:textSize="9dp"/>
+
+                <com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView
+                    android:id="@+id/salida_digital"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_salida" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="340dp"
+    android:id="@+id/layout_entradas_digital"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/fondo_dialog"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/fondo_1_header_dialog">
+
+
+        <ImageView
+            android:id="@+id/dialog_confi_icono"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon_salida"/>
+        <TextView
+            android:id="@+id/dialog_confi_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIGITAL INPUT"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        >
+
+        <Button
+            android:id="@+id/bton_unir"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/letra_boton"
+            android:layout_margin="12dp"
+            android:text="unir"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:padding="12dp"
+            >
+            <Button
+                android:id="@+id/bton_eliminar"
+                android:layout_width="70dp"
+                android:textColor="@color/letra_boton"
+                android:background="@android:color/transparent"
+                android:layout_height="40dp"
+                android:text="eliminar"/>
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bton_guardar"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:textColor="@color/letra_boton"
+
+                android:background="@android:color/transparent"
+                android:text="Listo"/>
+
+        </LinearLayout>
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="digital_input">
+        <item>DI_0</item>
+        <item>DI_1</item>
+        <item>DI_2</item>
+        <item>DI_3</item>
+        <item>DI_4</item>
+        <item>DI_5</item>
+        <item>DI_6</item>
+        <item>DI_7</item>
+
+    </string-array>
+    <string-array name="digital_output">
+        <item>DO_0</item>
+        <item>DO_1</item>
+        <item>DO_2</item>
+        <item>DO_3</item>
+        <item>DO_4</item>
+        <item>DO_5</item>
+        <item>DO_6</item>
+        <item>DO_7</item>
+
+    </string-array>
+
+    <string-array name="digital_estados">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>

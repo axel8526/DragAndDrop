@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#17283b</color>
+    <color name="colorPrimaryDark">#c0060423</color>
+    <color name="colorAccent">#0a5f76</color>
+    <color name="tranparente">#393d32d7</color>
+    <color name="color_contenedor_componentes">#51142243</color>
+    <color name="color_linea">#8afff9</color>
+
+    <color name="fondo_menu">#aa000000</color>
+    <color name="barra_herramientas">#ee050523</color>
+    <color name="fondo_imagen_omitir">#3d010229</color>
+
+    <color name="color0_dialog">#7bd8f2</color>
+    <color name="color1_dialog">#4ccdf1</color>
+    <color name="color2_dialog">#268fac</color>
+
+    <color name="letra_boton">#0a5f76</color>
+    
+    <color name="color_filter_dad">#8b000000</color>
+
+    <color name="fondo_dialog">#ffffff</color>
+    <color name="color_inhabilitar">#1b000000</color>
+</resources>
