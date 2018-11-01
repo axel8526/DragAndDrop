@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color2_dialog"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.Configuracion"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:progressTint="@android:color/white"
+        android:layout_marginTop="184dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progress_bar">
+
+        <ImageView
+            android:id="@+id/image_usuario"
+            android:layout_width="91dp"
+            android:layout_height="94dp"
+            android:visibility="invisible" />
+
+
+        <TextView
+            android:id="@+id/mensaje_usuario"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:text="Conectando..."
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/text_ip"
+            android:layout_width="150dp"
+            android:layout_height="49dp"
+            android:hint="Ingresar IP"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/linear_botones"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/boton_conectar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conectar"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/boton_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Ingresar de nuevo IP"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
