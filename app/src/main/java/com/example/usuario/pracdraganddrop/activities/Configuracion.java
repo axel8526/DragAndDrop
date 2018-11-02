@@ -26,19 +26,20 @@ import com.example.usuario.pracdraganddrop.R;
 import com.example.usuario.pracdraganddrop.control.DragAndDrop;
 
 import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Configuracion extends AppCompatActivity {
 
-   private String ip="nada";
-    ProgressBar bar;
+   private String ip="nada", json;
+   private ProgressBar bar;
    private boolean controller, controllerCatch=true;
-    TextView mensaje;
-    Button conectar, ingresar;
-    EditText editIp;
-    ImageView imageView;
-    Socket socket;
-
+   private TextView mensaje;
+   private Button conectar, ingresar;
+   private EditText editIp;
+   private ImageView imageView;
+   public static final String CLAVE="JSON";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -55,12 +56,14 @@ public class Configuracion extends AppCompatActivity {
 
         proceso();
 
+        Bundle bundle= getIntent().getExtras();
+        json= bundle.getString(CLAVE);
+
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     public void proceso(){
-        bar.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
         new Handler().postDelayed(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -78,73 +81,54 @@ public class Configuracion extends AppCompatActivity {
         NetworkInfo network = conexion.getActiveNetworkInfo();
 
         if(network !=null && network.isConnected()){
-            conectarServicio();
+            if (ip.equalsIgnoreCase("nada")){
+                fail();
+                mensaje.setText("No se encuentra una IP registrada");
+            } else {
+                socketProcess();
+            }
         } else {
-            imageView.setImageDrawable(getDrawable(R.drawable.ic_fail));
+            imageView.setImageDrawable(getDrawable(R.drawable.ic_no_wifi));
             imageView.setVisibility(View.VISIBLE);
-            mensaje.setText("No estas conectado a internet.");
-
+            mensaje.setText("No se encuentra conexión a internet");
 
         }
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void conectarServicio(){
-        if (ip.equalsIgnoreCase("nada")){
-            fail();
-            mensaje.setText("No se encuentra una IP registrada");
-        } else {
-            socketProcess();
-        }
-    }
-
-
-
+    ObjectOutputStream oos;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void socketProcess(){
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    socket= new Socket(ip, 9999);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-     //   dontFall();
-
-    }
-
-
-    /*@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void dontFall(){
-
-            mensaje.setText("Conexión exitosa. \n Abriendo Drag and Drop");
-            imageView.setVisibility(View.VISIBLE);
-            imageView.setImageDrawable(getDrawable(R.drawable.ic_check));
-            new Handler().postDelayed(new Runnable() {
+        while (controllerCatch){
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent= new Intent(getApplicationContext(), DragAndDropActivity.class);
-                    startActivity(intent);
-
+                    try {
+                    Socket  socket= new Socket(ip, 1500);
+                        oos= new ObjectOutputStream(socket.getOutputStream());
+                        oos.writeObject(json);
+                        socket.close();
+                        controllerCatch= false;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            },2000);
+            }).start();
+        }
+
+       mensajes();
 
     }
-*/
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void dontFall(){
+    public void mensajes(){
 
 
-        if(socket.isConnected()){
-            mensaje.setText("Conexión exitosa. \n Abriendo Drag and Drop");
+        if(oos!=null){
+            mensaje.setText("Conexión exitosa. \n Información enviada.");
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageDrawable(getDrawable(R.drawable.ic_check));
             new Handler().postDelayed(new Runnable() {

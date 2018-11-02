@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color2_dialog"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".activities.Configuracion"
+    android:background="@drawable/background"
+    tools:ignore="MissingDefaultResource"
     tools:layout_editor_absoluteY="25dp">
-
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="141dp"
-        android:layout_height="145dp"
+        android:layout_height="141dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="33dp"
         android:progressTint="@android:color/white"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="184dp" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="327dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="212dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/image_usuario"
@@ -45,6 +46,7 @@
             android:textSize="20dp" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/text_ip"
             android:layout_width="150dp"
             android:layout_height="49dp"
@@ -54,26 +56,28 @@
         <LinearLayout
             android:id="@+id/linear_botones"
             android:layout_width="wrap_content"
-            android:layout_height="49dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
+                android:visibility="invisible"
                 android:id="@+id/boton_conectar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Conectar"
-                android:visibility="invisible" />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/ic_refresh" />
 
             <Button
+                android:visibility="invisible"
                 android:id="@+id/boton_ip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
                 android:text="Ingresar de nuevo IP"
-                android:visibility="invisible" />
+                android:background="@drawable/boton_ingreso"/>
 
         </LinearLayout>
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

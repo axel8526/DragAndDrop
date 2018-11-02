@@ -20,14 +20,14 @@
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".activities.Splash" >
+        <activity android:name=".activities.Splash" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Configuracion"></activity>
+        <activity android:name=".activities.Configuracion" android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
