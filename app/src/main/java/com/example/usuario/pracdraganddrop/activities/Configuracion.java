@@ -1,9 +1,12 @@
 package com.example.usuario.pracdraganddrop.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -63,9 +66,26 @@ public class Configuracion extends AppCompatActivity {
             @Override
             public void run() {
                 bar.setVisibility(View.INVISIBLE);
-                conectarServicio();
+                pruebaInternet();
             }
-        }, 4000);
+        }, 3000);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void pruebaInternet(){
+        ConnectivityManager conexion = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo network = conexion.getActiveNetworkInfo();
+
+        if(network !=null && network.isConnected()){
+            conectarServicio();
+        } else {
+            imageView.setImageDrawable(getDrawable(R.drawable.ic_fail));
+            imageView.setVisibility(View.VISIBLE);
+            mensaje.setText("No estas conectado a internet.");
+
+
+        }
     }
 
 
@@ -80,28 +100,48 @@ public class Configuracion extends AppCompatActivity {
     }
 
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void socketProcess(){
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
-                     socket = new Socket("192.168.0.18", 9999);
-                    controllerCatch=false;
-                }catch (IOException e){};
-
+                try {
+                    socket= new Socket(ip, 9999);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
 
-        dontFall();
+     //   dontFall();
 
     }
 
 
+    /*@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void dontFall(){
 
+            mensaje.setText("Conexión exitosa. \n Abriendo Drag and Drop");
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setImageDrawable(getDrawable(R.drawable.ic_check));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent= new Intent(getApplicationContext(), DragAndDropActivity.class);
+                    startActivity(intent);
+
+                }
+            },2000);
+
+    }
+*/
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void dontFall(){
+
 
         if(socket.isConnected()){
             mensaje.setText("Conexión exitosa. \n Abriendo Drag and Drop");

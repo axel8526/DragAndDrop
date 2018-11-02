@@ -10,12 +10,13 @@
 
     <ImageView
         android:id="@+id/image_animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="184dp"
+        android:layout_width="211dp"
+        android:layout_height="211dp"
+        android:layout_marginBottom="216dp"
         android:background="@drawable/animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
 
