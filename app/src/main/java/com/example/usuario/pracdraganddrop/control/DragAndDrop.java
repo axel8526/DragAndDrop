@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.example.usuario.pracdraganddrop.R;
 import com.example.usuario.pracdraganddrop.componentes.EntradaView;
 import com.example.usuario.pracdraganddrop.componentes.SalidaView;
+import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
 import com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView;
 import com.example.usuario.pracdraganddrop.modelos.ComponenteEstado;
 
@@ -234,4 +235,17 @@ public class DragAndDrop  {
 
         return salidas;
     }
+    public ArrayList<EntradaDigitalView> getEntradasDigitales(){
+        ArrayList<EntradaDigitalView> entradas=new ArrayList<>();
+
+        for (int i=0; i<layoutDragAndDrop.getChildCount();i++){
+            if (layoutDragAndDrop.getChildAt(i) instanceof EntradaDigitalView)
+                entradas.add((EntradaDigitalView) layoutDragAndDrop.getChildAt(i));
+
+
+        }
+
+        return entradas;
+    }
+
 }

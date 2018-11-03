@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/color_contenedor_componentes"
-    android:orientation="horizontal"
-    tools:context=".activities.DragAndDropActivity">
+    android:orientation="horizontal">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -73,7 +72,7 @@
                     android:id="@+id/layou_lines"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/background"
 
 
                     />

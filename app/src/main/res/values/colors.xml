@@ -4,12 +4,12 @@
     <color name="colorPrimaryDark">#c0060423</color>
     <color name="colorAccent">#0a5f76</color>
     <color name="tranparente">#393d32d7</color>
-    <color name="color_contenedor_componentes">#51142243</color>
-    <color name="color_linea">#8afff9</color>
+    <color name="color_contenedor_componentes">#64142243</color>
+    <color name="color_linea">#070e1d</color>
 
     <color name="fondo_menu">#aa000000</color>
     <color name="barra_herramientas">#ee050523</color>
-    <color name="fondo_imagen_omitir">#3d010229</color>
+    <color name="fondo_imagen_omitir">#f62f5971</color>
 
     <color name="color0_dialog">#7bd8f2</color>
     <color name="color1_dialog">#4ccdf1</color>

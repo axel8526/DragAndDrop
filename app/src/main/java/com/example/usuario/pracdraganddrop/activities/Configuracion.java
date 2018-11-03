@@ -1,19 +1,33 @@
 package com.example.usuario.pracdraganddrop.activities;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,13 +39,20 @@ import android.widget.Toast;
 import com.example.usuario.pracdraganddrop.R;
 import com.example.usuario.pracdraganddrop.control.DragAndDrop;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.ExecutionException;
 
 public class Configuracion extends AppCompatActivity {
 
+    private final static String ALEX="192.168.1.56";
    private String ip="nada", json;
    private ProgressBar bar;
    private boolean controller, controllerCatch=true;
@@ -39,25 +60,46 @@ public class Configuracion extends AppCompatActivity {
    private Button conectar, ingresar;
    private EditText editIp;
    private ImageView imageView;
+   private Dialog dialogLoad;
    public static final String CLAVE="JSON";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuracion);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
 
-        bar= findViewById(R.id.progress_bar);
-        mensaje= findViewById(R.id.mensaje_usuario);
-        imageView= findViewById(R.id.image_usuario);
-        conectar= findViewById(R.id.boton_conectar);
-        ingresar= findViewById(R.id.boton_ip);
-        editIp= findViewById(R.id.text_ip);
+        dialogLoad=new Dialog(this);
+        dialogLoad.setContentView(R.layout.activity_configuracion);
+        dialogLoad.setCanceledOnTouchOutside(false);
+        dialogLoad.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        proceso();
+
+
+        bar=dialogLoad.findViewById(R.id.progress_bar);
+        mensaje= dialogLoad.findViewById(R.id.mensaje_usuario);
+        imageView= dialogLoad.findViewById(R.id.image_usuario);
+        conectar= dialogLoad.findViewById(R.id.boton_conectar);
+        ingresar= dialogLoad.findViewById(R.id.boton_ip);
+        editIp= dialogLoad.findViewById(R.id.text_ip);
+
+        bar.getIndeterminateDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+
 
         Bundle bundle= getIntent().getExtras();
-        json= bundle.getString(CLAVE);
+        if(bundle!=null){
+            json= bundle.getString(CLAVE);
+        }else{
+
+            json="vacio";
+        }
+
+        dialogLoad.show();
+        proceso();
+
 
     }
 
@@ -71,7 +113,7 @@ public class Configuracion extends AppCompatActivity {
                 bar.setVisibility(View.INVISIBLE);
                 pruebaInternet();
             }
-        }, 3000);
+        }, 2000);
     }
 
 
@@ -85,7 +127,12 @@ public class Configuracion extends AppCompatActivity {
                 fail();
                 mensaje.setText("No se encuentra una IP registrada");
             } else {
-                socketProcess();
+                //socketProcess();
+                if (enviaDatos(ip,666+"",json)){
+                    mensajes(true);
+                }else{
+                    mensajes(false);
+                }
             }
         } else {
             imageView.setImageDrawable(getDrawable(R.drawable.ic_no_wifi));
@@ -96,47 +143,101 @@ public class Configuracion extends AppCompatActivity {
     }
 
 
-    ObjectOutputStream oos;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void socketProcess(){
 
-        while (controllerCatch){
+        Toast.makeText(this, ip, Toast.LENGTH_SHORT).show();
+
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                    Socket  socket= new Socket(ip, 1500);
+                    /*try {
+                    Socket  socket= new Socket(ip, 777);
+                    while(controllerCatch){
                         oos= new ObjectOutputStream(socket.getOutputStream());
                         oos.writeObject(json);
                         socket.close();
                         controllerCatch= false;
+                    }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }*/
+                    try {
+                        Socket socket=new Socket(ip,777);
+
+                        DataOutputStream flujoSalida=new DataOutputStream(socket.getOutputStream());
+                        flujoSalida.writeUTF(json);
+                        socket.close();
+
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+
                     }
                 }
             }).start();
-        }
 
-       mensajes();
 
     }
 
 
+    public boolean enviaDatos(String ip, String puerto, String json){
+        Conectar conectar=new Conectar();
+        conectar.execute(ip,puerto,json);
+
+
+        try {
+            return conectar.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+    private class Conectar extends AsyncTask<String, Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+            String ip=params[0];
+            int puerto=Integer.parseInt(params[1]);
+            String json=params[2];
+
+            try {
+                Socket socket=new Socket(ip,puerto);
+                DataOutputStream salidaDatos=new DataOutputStream(socket.getOutputStream());
+                salidaDatos.writeUTF(json);
+
+                socket.close();
+                return true;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+        }
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void mensajes(){
+    public void mensajes(boolean comprobarEnvio){
 
 
-        if(oos!=null){
-            mensaje.setText("Conexión exitosa. \n Información enviada.");
+        if(comprobarEnvio){
+            mensaje.setText(json!="vacio" ?"Información enviada." : "Conexión exitosa." );
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageDrawable(getDrawable(R.drawable.ic_check));
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent= new Intent(getApplicationContext(), DragAndDropActivity.class);
-                    startActivity(intent);
 
+                    iniciarDragAndDrop();
                 }
             },2000);
         } else{
@@ -144,6 +245,35 @@ public class Configuracion extends AppCompatActivity {
             mensaje.setText("Error en la conexión. \n Verifique su conexión a internet o digite de nuevo la IP." );
 
         }
+    }
+    @TargetApi(21)
+    public void iniciarDragAndDrop(){
+        Animation animation= AnimationUtils.loadAnimation(this,R.anim.desaparecer_centro);
+        animation.setFillAfter(true);
+        dialogLoad.findViewById(R.id.layout_configuracion).startAnimation(animation);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Intent intent= new Intent(getApplicationContext(), DragAndDropActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
     }
 
 
@@ -187,6 +317,8 @@ public class Configuracion extends AppCompatActivity {
 
         editor.putString("IP", ip);
 
+
+
         editor.apply();
     }
 
@@ -198,6 +330,7 @@ public class Configuracion extends AppCompatActivity {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
 
         ip= sharedPreferences.getString("IP", "Nada");
+
 
 
     }

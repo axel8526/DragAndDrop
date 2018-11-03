@@ -22,6 +22,7 @@ public class EntradaDigitalView extends EntradaView {
         super(context, attrs, defStyleAttr);
     }
 
+
     public String getReferencia() {
         return referencia;
     }

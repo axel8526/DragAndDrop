@@ -1,9 +1,14 @@
 package com.example.usuario.pracdraganddrop.activities;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +37,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
     private Button btonAbrirMenu, btonCancelar, btonEnviar;
 
+    @TargetApi(21)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,8 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
         findViews();
         iniciarControles();
+
+
 
     }
 
@@ -61,7 +69,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
 
     }
-
+@TargetApi(21)
     public void clickBotones(View view) {
 
         switch (view.getId()) {
@@ -81,8 +89,21 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
             case R.id.bton_enviar:
                 OrganizarJson organizarJson=new OrganizarJson(this);
+                String json=organizarJson.getJson2(dragAndDrop.getComponentes());
 
-                Toast.makeText(this, organizarJson.getJson(dragAndDrop.getSalidasDigitales()), Toast.LENGTH_LONG).show();
+                if(json.length()==2){
+                    Toast.makeText(this, "Coloca componentes", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Toast.makeText(this,json, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,organizarJson.getJson(dragAndDrop.getSalidasDigitales()), Toast.LENGTH_LONG).show();
+
+
+                Intent intent=new Intent(this,Configuracion.class);
+                intent.putExtra(Configuracion.CLAVE,json);
+                startActivity(intent);
+
                 break;
         }
 

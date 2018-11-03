@@ -202,6 +202,29 @@ public class ConfiComponente {
 
         spinnerEstado.setSelection(salidaView.getEstado());
 
+        if (salidaView.isUnido()){
+            if (salidaView.getConfigDO()==null){
+                salidaView.setConfigDO(new ConfigDO(0,0));
+            }
+            dialogConfigItem.findViewById(R.id.confi_contenedor_intervalo).getLayoutParams().height=0;
+            salidaView.setIntervalo(false);
+
+
+            dialogConfigItem.findViewById(R.id.contenedor_configuracion).getLayoutParams().height=
+                    LinearLayout.LayoutParams.WRAP_CONTENT;
+            spinnerEntrada.setSelection(salidaView.getConfigDO().getEstadoEntrada());
+            spinnerSalida.setSelection(salidaView.getConfigDO().getEstadoSalida());
+            nombreEntrada.setText(((EntradaDigitalView)salidaView.getEntradaView()).getReferencia());
+            nombreSalida.setText(salidaView.getReferencia());
+        }else{
+            dialogConfigItem.findViewById(R.id.contenedor_configuracion).getLayoutParams().height=0;
+
+            dialogConfigItem.findViewById(R.id.confi_contenedor_intervalo).getLayoutParams().height=
+                    LinearLayout.LayoutParams.WRAP_CONTENT;
+
+            salidaView.setIntervalo(true);
+        }
+
         if (salidaView.isIntervalo()){
             habilitarIntervalo.setChecked(true);
             numIntervalo.setText(salidaView.getTiempoIntervalo()+"");
@@ -211,19 +234,7 @@ public class ConfiComponente {
             numIntervalo.setText("");
         }
 
-        if (salidaView.isUnido()){
-            if (salidaView.getConfigDO()==null){
-                salidaView.setConfigDO(new ConfigDO(0,0));
-            }
-            dialogConfigItem.findViewById(R.id.contenedor_configuracion).getLayoutParams().height=
-                    LinearLayout.LayoutParams.WRAP_CONTENT;
-            spinnerEntrada.setSelection(salidaView.getConfigDO().getEstadoEntrada());
-            spinnerSalida.setSelection(salidaView.getConfigDO().getEstadoSalida());
-            nombreEntrada.setText(((EntradaDigitalView)salidaView.getEntradaView()).getReferencia());
-            nombreSalida.setText(salidaView.getReferencia());
-        }else{
-            dialogConfigItem.findViewById(R.id.contenedor_configuracion).getLayoutParams().height=0;
-        }
+
 
 
 

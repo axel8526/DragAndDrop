@@ -35,6 +35,13 @@ public class EntradaView extends AppCompatImageView  {
         super(context, attrs, defStyleAttr);
     }
 
+    public ArrayList<SalidaView> getSalidaViews() {
+        return salidaViews;
+    }
+
+    public void setSalidaViews(ArrayList<SalidaView> salidaViews) {
+        this.salidaViews = salidaViews;
+    }
 
     public void addSalida(SalidaView salidaView) {
         salidaViews.add(salidaView);
