@@ -70,18 +70,21 @@
 
                 <Button
                     android:id="@+id/boton_conectar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Conectar"
-                    android:visibility="invisible" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_refresh"
+                    />
 
                 <Button
+                    android:padding="10dp"
+                    android:textColor="@android:color/white"
                     android:id="@+id/boton_ip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:background="@drawable/boton_ingreso"
                     android:text="Ingresar de nuevo IP"
-                    android:visibility="invisible" />
+                    />
 
             </LinearLayout>
         </LinearLayout>
