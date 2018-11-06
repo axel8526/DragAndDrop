@@ -43,6 +43,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
@@ -128,7 +129,7 @@ public class Configuracion extends AppCompatActivity {
                 mensaje.setText("No se encuentra una IP registrada");
             } else {
                 //socketProcess();
-                if (enviaDatos(ip,666+"",json)){
+                if (enviaDatos(ip,1500+"",json)){
                     mensajes(true);
                 }else{
                     mensajes(false);
@@ -210,8 +211,8 @@ public class Configuracion extends AppCompatActivity {
 
             try {
                 Socket socket=new Socket(ip,puerto);
-                DataOutputStream salidaDatos=new DataOutputStream(socket.getOutputStream());
-                salidaDatos.writeUTF(json);
+                ObjectOutputStream salidaDatos=new ObjectOutputStream(socket.getOutputStream());
+                salidaDatos.writeObject(json);
 
                 socket.close();
                 return true;
