@@ -45,8 +45,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="vertical"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="12dp"
             android:layout_height="wrap_content">
 
@@ -104,20 +104,20 @@
 
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="12dp"
                 android:id="@+id/contenedor_configuracion"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
 
                 android:gravity="center"
-                android:padding="12dp"
                 >
 
                 <LinearLayout
 
 
                     android:background="@drawable/fondo_1_item"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -130,13 +130,14 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
-                        android:text="DI0"/>
+                        android:text="DI_0"/>
                     <Spinner
+                        android:layout_marginLeft="8dp"
                         android:id="@+id/confi_spinner2"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:entries="@array/digital_estados"></Spinner>
+                        android:entries="@array/digital_I_estados"></Spinner>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,7 +148,7 @@
                     android:textSize="30dp"/>
                 <LinearLayout
 
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -161,10 +162,10 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
-                        android:text="DO0"/>
+                        android:text="DO_0"/>
                     <Spinner
                         android:id="@+id/confi_spinner3"
-                        android:layout_width="match_parent"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:entries="@array/digital_estados"></Spinner>

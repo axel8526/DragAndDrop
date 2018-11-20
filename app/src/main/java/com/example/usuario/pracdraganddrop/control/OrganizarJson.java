@@ -42,7 +42,7 @@ public class OrganizarJson {
                     jsonComponente.put("type","input");
                     jsonComponente.put("interval",false);
                     jsonComponente.put("time_interval",0);
-                    jsonComponente.put("initial_state:",false);
+                    jsonComponente.put("initial_state",false);
                     jsonComponente.put("value_entry",false);
                     jsonComponente.put("value_output",false);
 
@@ -55,9 +55,9 @@ public class OrganizarJson {
 
                         jsonSalida.put("channel", salida.getReferencia());
                         jsonSalida.put("type","output");
+                        jsonSalida.put("initial_state",salida.getEstado()== 0? true : false);
                         jsonSalida.put("interval",salida.isIntervalo());
                         jsonSalida.put("time_interval",salida.getTiempoIntervalo());
-                        jsonSalida.put("initial_state:",salida.getEstado()==1 ? false : true);
 
                         if (salida.getConfigDO()!=null){
                             if (salida.getConfigDO().getEstadoEntrada()==0){
@@ -95,9 +95,9 @@ public class OrganizarJson {
                     if (!salida.isUnido()){
                         jsonComponente.put("channel", salida.getReferencia());
                         jsonComponente.put("type","output");
+                        jsonComponente.put("initial_state",salida.getEstado()==0 ? true : false);
                         jsonComponente.put("interval",salida.isIntervalo());
                         jsonComponente.put("time_interval",salida.getTiempoIntervalo());
-                        jsonComponente.put("initial_state:",salida.getEstado()==0 ? true : false);
 
                         if (salida.getConfigDO()!=null){
                             if (salida.getConfigDO().getEstadoEntrada()==0){

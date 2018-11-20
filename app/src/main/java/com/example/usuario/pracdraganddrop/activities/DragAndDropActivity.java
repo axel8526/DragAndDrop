@@ -72,6 +72,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 @TargetApi(21)
     public void clickBotones(View view) {
 
+        Intent intent=new Intent(this,Configuracion.class);
         switch (view.getId()) {
             case R.id.bton_abrir_entradas:
 
@@ -100,8 +101,14 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
                 //Toast.makeText(this,organizarJson.getJson(dragAndDrop.getSalidasDigitales()), Toast.LENGTH_LONG).show();
 
 
-                Intent intent=new Intent(this,Configuracion.class);
+
                 intent.putExtra(Configuracion.CLAVE,json);
+                startActivity(intent);
+
+                break;
+
+            case R.id.bton_stop:
+                intent.putExtra(Configuracion.CLAVE,"STOP");
                 startActivity(intent);
 
                 break;

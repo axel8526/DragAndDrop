@@ -25,7 +25,12 @@
     </string-array>
 
     <string-array name="digital_estados">
-        <item>0</item>
-        <item>1</item>
+        <item>Encendido</item>
+        <item>Apagado</item>
+    </string-array>
+
+    <string-array name="digital_I_estados">
+        <item>HIGHT</item>
+        <item>LOW</item>
     </string-array>
 </resources>

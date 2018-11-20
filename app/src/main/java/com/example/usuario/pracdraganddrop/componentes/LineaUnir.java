@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.example.usuario.pracdraganddrop.R;
 
-@TargetApi(23)
+
 public class LineaUnir extends View {
     private PointF comSalida;
     private PointF comEntrada;
@@ -22,7 +22,7 @@ public class LineaUnir extends View {
     public void onDraw(Canvas canvas){
 
         Paint paint=new Paint();
-        paint.setColor(getContext().getResources().getColor(R.color.color_linea,null));
+        paint.setColor(getContext().getResources().getColor(R.color.color_linea));
         paint.setStrokeWidth(10);
         canvas.drawLine(comSalida.x,comSalida.y,comEntrada.x,comEntrada.y,paint);
     }

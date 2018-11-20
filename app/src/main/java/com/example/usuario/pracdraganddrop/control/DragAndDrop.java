@@ -194,7 +194,7 @@ public class DragAndDrop  {
                     //if (v.getTag().toString().equalsIgnoreCase(MainActivity.IMAGE_ENTRADA)){
                     EntradaView entradaView=(EntradaView)v;
 
-                    entradaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir,null));
+                    entradaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir));
 
 
                 }
@@ -203,7 +203,7 @@ public class DragAndDrop  {
                 if (v instanceof SalidaView){
 
                     SalidaView salidaView=(SalidaView) v;
-                    salidaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir,null));
+                    salidaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir));
                 }
             }else{
                 AppCompatImageView imageView=(AppCompatImageView)layoutDragAndDrop.getChildAt(i);
