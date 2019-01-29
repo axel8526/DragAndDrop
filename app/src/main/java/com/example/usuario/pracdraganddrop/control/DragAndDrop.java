@@ -12,8 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.R;
+import com.example.usuario.pracdraganddrop.activities.DragAndDropActivity;
 import com.example.usuario.pracdraganddrop.componentes.EntradaView;
 import com.example.usuario.pracdraganddrop.componentes.SalidaView;
 import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
@@ -28,13 +30,53 @@ public class DragAndDrop  {
     public static final int ESPERA_ENTRADA=1;
     public static final int ESPERA_SALIDA=2;
 
+
+
     private Context context;
     private RelativeLayout layoutDragAndDrop;
     private ComponenteEstado componenteEstado;
 
     private ConfiComponente confiComponente;
 
+    //inicia codigo con patron singleton
+    //
 
+    private static DragAndDrop dragAndDrop;
+    private RelativeLayout layoutLineas;
+
+    private DragAndDrop(Context context){
+        this.context=context;
+
+    }
+
+    public static DragAndDrop getInstance(Context context){
+        if(dragAndDrop==null){
+            dragAndDrop=new DragAndDrop(context);
+        }
+        return dragAndDrop;
+    }
+
+    public void startDragAndDrop(){
+        activarReceptor();
+        componenteEstado=new ComponenteEstado();
+        componenteEstado.setEstadoDragAndDrop(ESTADO_NORMAL);
+    }
+
+    public void setLayoutComponentes(RelativeLayout layoutDragAndDrop) {
+        this.layoutDragAndDrop = layoutDragAndDrop;
+    }
+
+    public void setLayoutLineas(RelativeLayout layoutLineas) {
+        this.layoutLineas = layoutLineas;
+    }
+    public ViewGroup getLayoutComponentes(){
+        return layoutDragAndDrop;
+    }
+
+    public ViewGroup getLayoutLines(){
+        return layoutLineas;
+    }
+    //termina clase con patron singleton////////
 
     public DragAndDrop(Context context, RelativeLayout layoutDragAndDrop){
         this.context=context;
@@ -46,6 +88,7 @@ public class DragAndDrop  {
     }
     private void activarReceptor(){
         layoutDragAndDrop.setOnDragListener(startDrag);
+
     }
 
     private View.OnDragListener startDrag= new View.OnDragListener() {

@@ -7,8 +7,10 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.R;
+import com.example.usuario.pracdraganddrop.control.DragAndDrop;
 
 public class SalidaView extends AppCompatImageView {
 
@@ -35,9 +37,17 @@ public class SalidaView extends AppCompatImageView {
     }
 
     public void dibujarLinea(PointF inicio){
-        ViewGroup viewGroup=(RelativeLayout)this.getParent();
-        ViewGroup contenedorPadre=(ConstraintLayout)viewGroup.getParent();
-        ViewGroup containerLines=(RelativeLayout)contenedorPadre.findViewById(R.id.layou_lines);
+        DragAndDrop dragAndDrop=DragAndDrop.getInstance(this.getContext());
+        ViewGroup containerLines=null;
+
+        if(dragAndDrop!=null){
+            containerLines=dragAndDrop.getLayoutLines();
+        }
+
+        //se comentan lineas para probsar patron singleton
+       // ViewGroup viewGroup=(RelativeLayout)this.getParent();
+        //ViewGroup contenedorPadre=(ConstraintLayout)viewGroup.getParent();
+        //ViewGroup containerLines=(RelativeLayout)contenedorPadre.findViewById(R.id.layou_lines);
 
 
 
@@ -56,7 +66,9 @@ public class SalidaView extends AppCompatImageView {
             inicio.y=inicio.y+height2;
 
             PointF entrada = new PointF(entradaView.getX()+width, entradaView.getY()+height);
-            lineaUnir = new LineaUnir(viewGroup.getContext(), inicio, entrada);
+            lineaUnir = new LineaUnir(containerLines.getContext(), inicio, entrada);
+            //se comenta para probar patron singleton
+           // lineaUnir = new LineaUnir(viewGroup.getContext(), inicio, entrada);
 
             containerLines.addView(lineaUnir);
         }

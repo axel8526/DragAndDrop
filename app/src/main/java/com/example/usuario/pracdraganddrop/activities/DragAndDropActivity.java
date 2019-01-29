@@ -32,7 +32,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
     private MenuComponentes menuComponentes;
     private DragAndDrop dragAndDrop;
-    private RelativeLayout layoutDragAndDrop;
+    private RelativeLayout layoutDragAndDrop, layoutLines;
     private LinearLayout layoutComponente;
 
     private Button btonAbrirMenu, btonCancelar, btonEnviar;
@@ -48,15 +48,21 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
         setContentView(R.layout.activity_main);
 
         findViews();
-        iniciarControles();
+
 
 
 
     }
 
+    public void onResume(){
+        super.onResume();
+        iniciarControles();
+    }
+
     public void findViews() {
         layoutComponente = findViewById(R.id.layout_entradas);
         layoutDragAndDrop = findViewById(R.id.left_layout);
+        layoutLines=findViewById(R.id.layou_lines);
 
         btonAbrirMenu = findViewById(R.id.bton_abrir_entradas);
         btonCancelar = findViewById(R.id.bton_cancelar);
@@ -65,7 +71,14 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
     public void iniciarControles() {
         menuComponentes = new MenuComponentes(this, layoutComponente);
-        dragAndDrop = new DragAndDrop(this, layoutDragAndDrop);
+
+        //se comenta linea para probar patron singleton
+        //dragAndDrop = new DragAndDrop(this, layoutDragAndDrop);
+
+        dragAndDrop=DragAndDrop.getInstance(this);
+        dragAndDrop.setLayoutComponentes(layoutDragAndDrop);
+        dragAndDrop.setLayoutLineas(layoutLines);
+        dragAndDrop.startDragAndDrop();
 
 
     }
