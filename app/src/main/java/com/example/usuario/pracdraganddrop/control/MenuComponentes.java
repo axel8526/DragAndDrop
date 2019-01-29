@@ -61,14 +61,14 @@ public class MenuComponentes {
         if (view instanceof EntradaDigitalView){
             EntradaDigitalView entradaView=new EntradaDigitalView(context);
 
-            entradaView.setImageResource(R.drawable.icon_sensor);
-            //entradaView.setImageDrawable(((EntradaView)view).getDrawable());
+            // codigo anterior entradaView.setImageResource(R.drawable.icon_sensor);
+            entradaView.setImageDrawable(((EntradaView)view).getDrawable());
             return entradaView;
 
         }else if(view instanceof SalidaDigitalView){
             SalidaDigitalView salidaView=new SalidaDigitalView(context);
-            salidaView.setImageResource(R.drawable.icon_salida);
-            //salidaView.setImageDrawable(((SalidaView)view).getDrawable());
+            //codigo anterior salidaView.setImageResource(R.drawable.icon_salida);
+            salidaView.setImageDrawable(((SalidaView)view).getDrawable());
             return salidaView;
 
         }
@@ -94,6 +94,48 @@ public class MenuComponentes {
         }
     }
 
+//hacer que cuando se coloque una nueva vista a la interfaz esta automaticamente se aplique aqui
+    public void entradasArraste2(View.OnTouchListener touch){
+
+
+        ArrayList<EntradaView> entradasviews=new ArrayList<>();
+        ArrayList<SalidaView> salidaViews=new ArrayList<>();
+
+        for (int i=0; i<componentesLayout.getChildCount(); i++){
+            ViewGroup viewGroup=(LinearLayout)componentesLayout.getChildAt(i);
+            for (int j=0; j<viewGroup.getChildCount(); j++){
+                if(viewGroup.getChildAt(j) instanceof EntradaView){
+                    entradasviews.add((EntradaView)viewGroup.getChildAt(j));
+
+                }else if(viewGroup.getChildAt(j) instanceof SalidaView){
+                    salidaViews.add((SalidaView)viewGroup.getChildAt(j));
+                }
+            }
+
+        }
+
+
+        for(SalidaView  salidaView: salidaViews){
+            if (!comDO){
+                salidaView.setOnTouchListener(null);
+                salidaView.setColorFilter(Color.GRAY);
+            }else{
+                salidaView.setOnTouchListener(touch);
+                salidaView.clearColorFilter();
+            }
+        }
+        for(EntradaView  entradaView: entradasviews){
+            if (!comDI){
+                entradaView.setOnTouchListener(null);
+                entradaView.setColorFilter(Color.GRAY);
+            }else{
+                entradaView.setOnTouchListener(touch);
+                entradaView.clearColorFilter();
+            }
+        }
+
+    }
+
     public void cerrarMenus(){
         Animation animation;
         if (componentesLayout.getVisibility()==View.VISIBLE) {
@@ -101,7 +143,9 @@ public class MenuComponentes {
             animation.setFillAfter(true);
             componentesLayout.startAnimation(animation);
             componentesLayout.setVisibility(View.INVISIBLE);
-            entradasArraste(null);
+
+            //aqui va arrastre entradas normal
+            entradasArraste2(null);
         }
 
 
@@ -117,7 +161,9 @@ public class MenuComponentes {
             componentesLayout.startAnimation(animation);
             componentesLayout.setVisibility(View.VISIBLE);
             componentesLayout.setEnabled(true);
-            entradasArraste(touch);
+
+            //aqui va arrastre entradas normal
+            entradasArraste2(touch);
         }
 
 

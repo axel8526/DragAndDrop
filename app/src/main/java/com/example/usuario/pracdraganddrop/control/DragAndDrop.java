@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.usuario.pracdraganddrop.R;
@@ -77,6 +78,10 @@ public class DragAndDrop  {
                     view.invalidate();
 
                     View v = (View) dragEvent.getLocalState();
+
+                    int tamVista=(int)(50*context.getResources().getDisplayMetrics().density);
+                    ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(tamVista,tamVista);
+                    v.setLayoutParams(params);
 
                     RelativeLayout container = (RelativeLayout) view;//se castea un linear layout de layout receptor
                     container.addView(v);//añadimos la vista al contenedor que casteamos
