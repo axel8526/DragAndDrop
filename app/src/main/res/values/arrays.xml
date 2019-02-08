@@ -23,6 +23,41 @@
         <item>DO_7</item>
 
     </string-array>
+    <string-array name="led">
+        <item>LED_0</item>
+        <item>LED_1</item>
+        <item>LED_2</item>
+        <item>LED_3</item>
+        <item>LED_4</item>
+        <item>LED_5</item>
+        <item>LED_6</item>
+        <item>LED_7</item>
+
+    </string-array>
+
+    <string-array name="botones">
+        <item>BUTTON_0</item>
+        <item>BUTTON_1</item>
+        <item>BUTTON_2</item>
+        <item>BUTTON_3</item>
+        <item>BUTTON_4</item>
+        <item>BUTTON_5</item>
+        <item>BUTTON_6</item>
+        <item>BUTTON_7</item>
+    </string-array>
+
+    <string-array name="analog_input">
+        <item>AIV_1</item>
+        <item>AIV_2</item>
+        <item>AII_1</item>
+        <item>AII_2</item>
+    </string-array>
+    <string-array name="analog_output">
+        <item>AOV_1</item>
+        <item>AOV_2</item>
+        <item>AOI_1</item>
+        <item>AOI_2</item>
+    </string-array>
 
     <string-array name="digital_estados">
         <item>Encendido</item>

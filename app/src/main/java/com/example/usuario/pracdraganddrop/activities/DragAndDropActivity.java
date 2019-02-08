@@ -47,8 +47,8 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
         setContentView(R.layout.activity_main);
 
-        findViews();
 
+        findViews();
 
 
 
@@ -56,7 +56,9 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
     public void onResume(){
         super.onResume();
+
         iniciarControles();
+
     }
 
     public void findViews() {
@@ -75,7 +77,8 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
         //se comenta linea para probar patron singleton
         //dragAndDrop = new DragAndDrop(this, layoutDragAndDrop);
 
-        dragAndDrop=DragAndDrop.getInstance(this);
+        dragAndDrop=DragAndDrop.getInstance();
+        dragAndDrop.setContext(this);
         dragAndDrop.setLayoutComponentes(layoutDragAndDrop);
         dragAndDrop.setLayoutLineas(layoutLines);
         dragAndDrop.startDragAndDrop();
@@ -103,7 +106,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
             case R.id.bton_enviar:
                 OrganizarJson organizarJson=new OrganizarJson(this);
-                String json=organizarJson.getJson2(dragAndDrop.getComponentes());
+                String json=organizarJson.getJson(dragAndDrop.getComponentes());
 
                 if(json.length()==2){
                     Toast.makeText(this, "Coloca componentes", Toast.LENGTH_SHORT).show();
@@ -117,6 +120,7 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
                 intent.putExtra(Configuracion.CLAVE,json);
                 startActivity(intent);
+                //finish();
 
                 break;
 

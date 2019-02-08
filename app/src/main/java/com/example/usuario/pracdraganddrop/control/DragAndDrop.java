@@ -2,7 +2,6 @@ package com.example.usuario.pracdraganddrop.control;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageView;
@@ -12,11 +11,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.R;
-import com.example.usuario.pracdraganddrop.activities.DragAndDropActivity;
 import com.example.usuario.pracdraganddrop.componentes.EntradaView;
+import com.example.usuario.pracdraganddrop.componentes.InputCView;
+import com.example.usuario.pracdraganddrop.componentes.OutputCView;
 import com.example.usuario.pracdraganddrop.componentes.SalidaView;
 import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
 import com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView;
@@ -38,22 +37,24 @@ public class DragAndDrop  {
 
     private ConfiComponente confiComponente;
 
-    //inicia codigo con patron singleton
-    //
+    //inicia codigo para clase con patron singleton
 
     private static DragAndDrop dragAndDrop;
     private RelativeLayout layoutLineas;
 
-    private DragAndDrop(Context context){
-        this.context=context;
+    private DragAndDrop(){
 
     }
 
-    public static DragAndDrop getInstance(Context context){
+    public static DragAndDrop getInstance(){
         if(dragAndDrop==null){
-            dragAndDrop=new DragAndDrop(context);
+            dragAndDrop=new DragAndDrop();
         }
+
         return dragAndDrop;
+    }
+    public void setContext(Context context){
+        this.context=context;
     }
 
     public void startDragAndDrop(){
@@ -64,6 +65,8 @@ public class DragAndDrop  {
 
     public void setLayoutComponentes(RelativeLayout layoutDragAndDrop) {
         this.layoutDragAndDrop = layoutDragAndDrop;
+
+
     }
 
     public void setLayoutLineas(RelativeLayout layoutLineas) {
@@ -76,7 +79,7 @@ public class DragAndDrop  {
     public ViewGroup getLayoutLines(){
         return layoutLineas;
     }
-    //termina clase con patron singleton////////
+    //termina codigo de para clase con patron singleton////////
 
     public DragAndDrop(Context context, RelativeLayout layoutDragAndDrop){
         this.context=context;
@@ -122,8 +125,11 @@ public class DragAndDrop  {
 
                     View v = (View) dragEvent.getLocalState();
 
-                    int tamVista=(int)(50*context.getResources().getDisplayMetrics().density);
+                    int tamVista=(int)(60*context.getResources().getDisplayMetrics().density);
                     ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(tamVista,tamVista);
+
+
+
                     v.setLayoutParams(params);
 
                     RelativeLayout container = (RelativeLayout) view;//se castea un linear layout de layout receptor
@@ -131,6 +137,8 @@ public class DragAndDrop  {
                     v.setVisibility(View.VISIBLE);// Visibility to VISIBLE
                     v.setX(dragEvent.getX());
                     v.setY(dragEvent.getY());
+
+                   // ((InputCView)v).setReference("AI_V1");
 
 
                     MoverVista moverVista = new MoverVista(v, v.getX(), v.getY());
@@ -223,6 +231,7 @@ public class DragAndDrop  {
             @Override
             public void onClick(View view) {
                 confiComponente.opcionRealizar(view, componenteEstado);
+                System.out.println("onclick");
 
             }
         });
@@ -238,24 +247,24 @@ public class DragAndDrop  {
 
             if(componenteEstado.getEstadoDragAndDrop()==ESPERA_ENTRADA){
 
-                if (v instanceof EntradaView){
-                    //if (v.getTag().toString().equalsIgnoreCase(MainActivity.IMAGE_ENTRADA)){
-                    EntradaView entradaView=(EntradaView)v;
-
-                    entradaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir));
-
-
+                if(v instanceof InputCView){
+                    InputCView input=(InputCView)v;
+                    input.setColorFilterImage(R.color.fondo_imagen_omitir);
                 }
 
             }else if (componenteEstado.getEstadoDragAndDrop()==ESPERA_SALIDA){
-                if (v instanceof SalidaView){
-
-                    SalidaView salidaView=(SalidaView) v;
-                    salidaView.setColorFilter(context.getResources().getColor(R.color.fondo_imagen_omitir));
+                if(v instanceof OutputCView){
+                    OutputCView output=(OutputCView)v;
+                    output.setColorFilterImage(R.color.fondo_imagen_omitir);
                 }
             }else{
-                AppCompatImageView imageView=(AppCompatImageView)layoutDragAndDrop.getChildAt(i);
-                imageView.clearColorFilter();
+                 if(v instanceof InputCView ){
+                    InputCView input=(InputCView)v;
+                    input.clearColorFilter();
+                }else if(v instanceof OutputCView ){
+                    OutputCView input=(OutputCView)v;
+                    input.clearColorFilter();
+                }
             }
         }
 
@@ -269,31 +278,6 @@ public class DragAndDrop  {
 
         }
         return com;
-    }
-
-    public ArrayList<SalidaDigitalView> getSalidasDigitales(){
-        ArrayList<SalidaDigitalView> salidas=new ArrayList<>();
-
-        for (int i=0; i<layoutDragAndDrop.getChildCount();i++){
-            if (layoutDragAndDrop.getChildAt(i) instanceof SalidaDigitalView)
-                salidas.add((SalidaDigitalView)layoutDragAndDrop.getChildAt(i));
-
-
-        }
-
-        return salidas;
-    }
-    public ArrayList<EntradaDigitalView> getEntradasDigitales(){
-        ArrayList<EntradaDigitalView> entradas=new ArrayList<>();
-
-        for (int i=0; i<layoutDragAndDrop.getChildCount();i++){
-            if (layoutDragAndDrop.getChildAt(i) instanceof EntradaDigitalView)
-                entradas.add((EntradaDigitalView) layoutDragAndDrop.getChildAt(i));
-
-
-        }
-
-        return entradas;
     }
 
 }

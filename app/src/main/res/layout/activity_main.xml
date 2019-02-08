@@ -122,52 +122,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_gravity="start"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="2dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Digital input"
-                    android:textColor="@android:color/white"
-                    android:textSize="10dp"/>
-
-                <com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView
-                    android:id="@+id/entrada_digital"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/icon_sensor" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="2dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Digital output"
-                    android:textColor="@android:color/white"
-                    android:textSize="9dp"/>
-
-                <com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView
-                    android:id="@+id/salida_digital"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/icon_salida" />
-            </LinearLayout>
-
-
 
 
         </LinearLayout>

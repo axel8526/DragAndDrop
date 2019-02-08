@@ -17,8 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.componentes.EntradaView;
+import com.example.usuario.pracdraganddrop.componentes.OutputCView;
 import com.example.usuario.pracdraganddrop.componentes.SalidaView;
 import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
+import com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView;
 import com.example.usuario.pracdraganddrop.control.ConfiComponente;
 import com.example.usuario.pracdraganddrop.control.MoverVista;
 
@@ -201,7 +203,7 @@ public class MyDragEventListener implements View.OnDragListener{
                     public void onClick(View view) {
                         if (estadoComponentes.equalsIgnoreCase(ESPERA_ENTRADA)) {
 
-                            if (v instanceof SalidaView){
+                            if (v instanceof SalidaDigitalView){
                             //if (!dragData.equalsIgnoreCase(MainActivity.IMAGE_ENTRADA)) {
                                 EntradaView entradaView = (EntradaView) vistaEnEspera;
                                 SalidaView salidaView = (SalidaView) v;

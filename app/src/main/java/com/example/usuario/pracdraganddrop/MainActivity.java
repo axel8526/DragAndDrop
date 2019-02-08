@@ -2,17 +2,8 @@ package com.example.usuario.pracdraganddrop;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.componentes.EntradaView;
-import com.example.usuario.pracdraganddrop.componentes.SalidaView;
+import com.example.usuario.pracdraganddrop.componentes.OutputCView;
 import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
 import com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView;
 
@@ -153,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
        }else if(view instanceof SalidaDigitalView){
            SalidaDigitalView salidaView=new SalidaDigitalView(getApplicationContext());
-           salidaView.setImageDrawable(((SalidaView)view).getDrawable());
+           salidaView.setImageDrawable(((SalidaDigitalView)view).getDrawable());
            return salidaView;
 
        }

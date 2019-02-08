@@ -5,10 +5,9 @@ import android.graphics.PointF;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.example.usuario.pracdraganddrop.componentes.EntradaView;
-import com.example.usuario.pracdraganddrop.componentes.SalidaView;
+import com.example.usuario.pracdraganddrop.componentes.InputCView;
+import com.example.usuario.pracdraganddrop.componentes.OutputCView;
 
 import java.util.ArrayList;
 
@@ -67,12 +66,12 @@ public class MoverVista {
 
     public void mueveLinea(){
 
-        if (view instanceof EntradaView){
-        //if (view.getTag().toString().equalsIgnoreCase(MainActivity.IMAGE_ENTRADA)) {
-            EntradaView entradaView = (EntradaView) view;
+        if (view instanceof InputCView){
+
+            InputCView entradaView = (InputCView) view;
             entradaView.dibujarLineas();
-        } else {
-            SalidaView salidaView = (SalidaView) view;
+        } else if(view instanceof  OutputCView){
+            OutputCView salidaView = (OutputCView) view;
             salidaView.dibujarLinea(new PointF(view.getX(), view.getY()));
         }
     }
