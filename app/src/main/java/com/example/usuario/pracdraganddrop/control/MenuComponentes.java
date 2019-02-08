@@ -13,12 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.R;
-import com.example.usuario.pracdraganddrop.componentes.EntradaView;
 import com.example.usuario.pracdraganddrop.componentes.InputCView;
 import com.example.usuario.pracdraganddrop.componentes.OutputCView;
-import com.example.usuario.pracdraganddrop.componentes.SalidaView;
-import com.example.usuario.pracdraganddrop.componentes.entradas_digitales.EntradaDigitalView;
-import com.example.usuario.pracdraganddrop.componentes.salidas_digitales.SalidaDigitalView;
 
 import java.util.ArrayList;
 

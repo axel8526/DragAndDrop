@@ -117,12 +117,11 @@
         <LinearLayout
             android:id="@+id/layout_entradas"
             android:layout_width="70dp"
-            android:padding="4dp"
             android:background="@color/fondo_menu"
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_gravity="start"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:orientation="vertical">
 
 
