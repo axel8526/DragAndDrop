@@ -52,21 +52,15 @@ public class MenuComponentes {
         this.context=context;
         inputsOuputs=new ArrayList<>();
 
-        InputCView con=new InputCView(context,DI,R.drawable.icon_connect);
-        OutputCView out=new OutputCView(context,DO,R.drawable.icon_connect);
-        inputsOuputs.add(con);
-        inputsOuputs.add(out);
-
-        componentesLayout.addView(con);
-        componentesLayout.addView(out);
-
     }
 
     public void addOutput(OutputCView output){
         inputsOuputs.add(output);
+        componentesLayout.addView(output);
     }
     public void addInputs(InputCView input){
         inputsOuputs.add(input);
+        componentesLayout.addView(input);
     }
 
     public View.OnTouchListener touch=new View.OnTouchListener() {

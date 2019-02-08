@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.usuario.pracdraganddrop.R;
+import com.example.usuario.pracdraganddrop.componentes.InputCView;
+import com.example.usuario.pracdraganddrop.componentes.OutputCView;
 import com.example.usuario.pracdraganddrop.control.DragAndDrop;
 import com.example.usuario.pracdraganddrop.control.MenuComponentes;
 import com.example.usuario.pracdraganddrop.control.OrganizarJson;
@@ -73,6 +75,8 @@ public class DragAndDropActivity extends AppCompatActivity implements EstadoDrag
 
     public void iniciarControles() {
         menuComponentes = new MenuComponentes(this, layoutComponente);
+        menuComponentes.addInputs(new InputCView(this,MenuComponentes.DI,R.drawable.icon_sensor));
+        menuComponentes.addOutput(new OutputCView(this,MenuComponentes.DO,R.drawable.icon_salida));
 
         //se comenta linea para probar patron singleton
         //dragAndDrop = new DragAndDrop(this, layoutDragAndDrop);
